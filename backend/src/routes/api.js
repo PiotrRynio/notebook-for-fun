@@ -10,9 +10,9 @@ const {
 } = require('../actions/api/noteActions');
 
 router.get('/notes/', getAllNotes);
-router.get('/notes/{id}', getNote);
+router.get('/notes/:id', getNote);
 router.post('/notes/', saveNote);
 router.put('/notes/', updateNote);
-router.delete('/notes/{id}', deleteNote);
+router.delete('/notes/:id', deleteNote);
 
 module.exports = router;
