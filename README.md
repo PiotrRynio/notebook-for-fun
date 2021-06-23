@@ -1,4 +1,4 @@
-# Notebook For Fun
+# Notebook for fun
 
 https://github.com/PiotrRynio/notebook-for-fun
 
