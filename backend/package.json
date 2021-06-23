@@ -2,21 +2,29 @@
   "name": "notebook-for-fun-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node index.js",
-    "start-dev": "nodemon index.js",
+    "start": "node src/index.js",
+    "start-dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1   dddfdfdffdsfdsafdsafdsfdsfdsfds",
-    "pre-commit": "(npx prettier --write .) && (npx prettier --check .)"
+    "format": "prettier --write \"src/**/*.{js, ts,tsx, md, json}\"",
+    "pre-commit": "lint-staged"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
     "nodemon": "^2.0.7",
     "prettier": "^2.3.1"
   },
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "lint-staged": {
+    "src/**/*.{js, ts,tsx, md, json}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
