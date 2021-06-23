@@ -1,22 +1,10 @@
 const mongoose = require('mongoose');
-
+const { database } = require('../../config');
 // db connect
 mongoose
-  .connect('mongodb://127.0.0.1:27017/notes-notesForFan', {
+  .connect(database, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
   })
   .then();
-
-const Note = mongoose.model('Note', {
-  title: String,
-  body: String,
-});
-
-const newNote = new Note({
-  title: 'tytuł tekstowy',
-  body: 'text naszej notatki',
-});
-
-newNote.save().then(() => console.log('notatka została zapisana'));
