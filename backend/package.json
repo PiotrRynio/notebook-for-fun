@@ -6,12 +6,15 @@
   "scripts": {
     "start": "node index.js",
     "start-dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1   dddfdfdffdsfdsafdsafdsfdsfdsfds",
+    "pre-commit": "(npx prettier --write .) && (npx prettier --check .)"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "husky": "^6.0.0",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.3.1"
   },
   "dependencies": {
     "express": "^4.17.1"
