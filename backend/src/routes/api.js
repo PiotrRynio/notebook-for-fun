@@ -12,7 +12,7 @@ const {
 router.get('/notes/', getAllNotes);
 router.get('/notes/:id', getNote);
 router.post('/notes/', saveNote);
-router.put('/notes/', updateNote);
+router.put('/notes/:id', updateNote);
 router.delete('/notes/:id', deleteNote);
 
 module.exports = router;
