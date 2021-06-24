@@ -1,42 +1,48 @@
 const Note = require('../../db/models/Note');
 
 class NoteActions {
-  getAllNotes(req, res) {
-    Note.find({}, (err, doc) => {
-      console.log(doc);
-      res.status(200).json(doc);
-    });
+  async getAllNotes(req, res) {
+    await Note.find({}, (err, doc) => doc)
+      .then((doc) => res.status(200).json(doc))
+      .catch((err) => res.status(500).json({ message: `Server error: ${err}` }));
   }
 
-  getNote(req, res) {
+  async getNote(req, res) {
     const id = req.params.id;
-    // pobieranie notatek
-    //  zwrócenie notatek|
-    res.send('Pobrano notatkę! ID: ' + id);
+    await Note.findOne({ _id: id }, (err, doc) => doc)
+      .then((doc) => res.status(200).json(doc))
+      .catch((err) => res.status(404).json({ message: `Brak notatki: ${err}` }));
   }
 
-  saveNote(req, res) {
-    const newNote = new Note({
-      title: req.body.body,
-      body: req.body.title,
-    });
-    newNote.save().then(() => console.log('Note has just been saved!'));
-
-    res.send(`Stworzono notatkę! Title: ${req.body.title}; Body: ${req.body.body};`);
+  async saveNote(req, res) {
+    const { title, body } = req.body;
+    await new Note({ title, body })
+      .save()
+      .then((note) => res.status(201).json(note))
+      .catch((err) =>
+        res.status(422).json({ message: `Brak wymaganych danych do utworzenia notatki: ${err}` }),
+      );
   }
 
-  updateNote(req, res) {
+  async updateNote(req, res) {
+    const { id } = req.params;
+    const { title, body } = req.body;
+    await Note.findOne({ _id: id }, (err, doc) => doc)
+      .then((note) => {
+        note.title = title || note.title;
+        note.body = body || note.body;
+        return note.save();
+      })
+      .then((note) => res.status(201).json(note))
+      .catch((err) => res.status(422).json({ message: `Brak notatki: ${err}` }));
+  }
+
+  async deleteNote(req, res) {
     const id = req.params.id;
-    // pobieranie notatek
-    //  zwrócenie notatek|
-    res.send('Notatka zaktualizowana! ID: ' + id);
-  }
-
-  deleteNote(req, res) {
-    const id = req.params.id;
-    // pobieranie notatek
-    //  zwrócenie notatek|
-    res.send('Notatka usunięta! ID: ' + id);
+    const msg = await Note.deleteOne({ _id: id }).then(({ deletedCount }) =>
+      deletedCount ? { status: 204 } : { status: 404, text: 'Not possible - note does not exist' },
+    );
+    res.status(msg.status).json({ message: msg.text });
   }
 }
 
