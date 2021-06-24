@@ -9,12 +9,15 @@ oraz poznać nową wiedzę.
 
 ## Co dodałem od siebie:
 
-- **husky + prettier** (- wykorzystuję je tutaj, aby automatycznie formatować kod podczas wykonywania commita. Dzieje
-  się to przez pre-commit, czyli akcję wykonywaną automatycznie przed zacommitowaniem. Pozwala to uniknąć konfliktów na
+- **husky + prettier** - wykorzystuję je tutaj, aby automatycznie formatować kod podczas wykonywania commita. Dzieje się
+  to przez pre-commit, czyli akcję wykonywaną automatycznie przed zacommitowaniem. Pozwala to uniknąć konfliktów na
   repozytorium, szczególnie gdy nad jednym projektem pracuje większa liczba programistów. Dodatkowo zmodyfikowałem tutaj
   standardowe ustawienia "husky" w taki sposób, aby dwie części projektu (Frontend i Backend) miały niezależne
   ustawienia prettiera oraz huskiego). Dzięki powyższym zmianom lepiej zrozumiałem NPM i rozwiązałem problem, który nie
   był opisany w internecie. Z pewnością zastosuję nabytą wiedzę w innych projektach.
+
+- **nodemon** - znacznie wspomaga pracę programistyczną na BE. Pozwala na niewpisywanie za każdym razem komendy `$ node
+  index.js`. Instrukcja jest wywoływana każdorazowo po zapisaniu edytowanych plików.
 
 ---
 
