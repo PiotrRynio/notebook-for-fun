@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Notes.css";
 import { Note } from "./Note/Note";
 
@@ -16,12 +16,22 @@ export function Notes() {
     },
   ];
 
+  const [notesState, setNotesState] = useState(notes);
+
+  const deleteNote = (id) =>
+    setNotesState([...notesState].filter((note) => id !== note.id));
+
   return (
     <div>
       <p>Moje notatki:</p>
-
-      {notes.map(({ title, body, id }) => (
-        <Note id={id} title={title} body={body} />
+      {notesState.map(({ title, body, id }) => (
+        <Note
+          key={id}
+          id={id}
+          title={title}
+          body={body}
+          onDelete={(id) => deleteNote(id)}
+        />
       ))}
     </div>
   );
