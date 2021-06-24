@@ -13,8 +13,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "husky": "^6.0.0",
-    "lint-staged": "^11.0.0",
     "nodemon": "^2.0.7",
     "prettier": "^2.3.1"
   },
@@ -24,9 +22,6 @@
     "mongoose": "^5.12.14"
   },
   "lint-staged": {
-    "src/**/*.{js, ts,tsx, md, json}": [
-      "prettier --write",
-      "git add"
-    ]
+    "src/**/*.{js,css,md}": "prettier --write"
   }
 }
