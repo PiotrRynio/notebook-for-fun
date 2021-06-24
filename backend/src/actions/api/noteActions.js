@@ -2,10 +2,10 @@ const Note = require('../../db/models/Note');
 
 class NoteActions {
   getAllNotes(req, res) {
-    // pobieranie notatek
-
-    //  zwrócenie notatek|
-    res.send('Api działa - wszystkie notatki pobrano!');
+    Note.find({}, (err, doc) => {
+      console.log(doc);
+      res.status(200).json(doc);
+    });
   }
 
   getNote(req, res) {
