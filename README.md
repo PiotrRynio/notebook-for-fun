@@ -4,11 +4,10 @@ https://github.com/PiotrRynio/notebook-for-fun
 
 Tworze ten projekt w celach szkoleniowych oraz dla własnej zabawy. Podstawą projektu jest mini kurs na youtube. Podczas
 tworzenia projektu dodaję w nim własne rozszerzenia oraz robię pewne rzeczy inaczej, aby rozwinąć swoje umiejętności
-oraz poznać nową wiedzę.
+oraz poznać nową wiedzę. (Uwaga: pliki CSS zaciągnąłem w całości od autora projektu).
 
 ## Start:
 W głównym katalogu wpisujemy: `npm install`, a następnie uruchamiamy projekt przez wpisanie `npm run start-be` oraz `npm run start-fe`.
-
 
 ---
 
