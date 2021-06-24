@@ -7,7 +7,7 @@ tworzenia projektu dodaję w nim własne rozszerzenia oraz robię pewne rzeczy i
 oraz poznać nową wiedzę.
 
 ## Start:
-W głównym katalogu wpisujemy: `npm install` a następnie uruchamiamy projekt przez wpisanie `npm run start`.
+W głównym katalogu wpisujemy: `npm install`, a następnie uruchamiamy projekt przez wpisanie `npm run start-be` oraz `npm run start-fe`.
 
 
 ---
