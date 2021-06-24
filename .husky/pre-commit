@@ -3,3 +3,4 @@
 
 #cd backend && npm run pre-commit
 cd backend && npx lint-staged
+cd .. && cd frontend && npx lint-staged
