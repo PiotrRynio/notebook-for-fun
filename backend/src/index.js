@@ -1,8 +1,8 @@
 const express = require('express');
 const { port } = require('../config');
 const app = express();
-const bodyParser = require('body-parser');
 const apiRouter = require('./routes/api');
+const bodyParser = require('body-parser');
 
 require('./db/mongoose');
 
