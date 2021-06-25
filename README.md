@@ -28,6 +28,8 @@ oraz `npm run start-fe`.
 - **clean code** - część kodu pisałem z zasadami pisania "Czystego Kodu". Wykorzystywałem między innymi funkcje
   mapujące, funkcje strzałkowe czy sposoby na krótsze pisanie funkcji. Używałem również komponentów funkcyjnych.
 
+- **naprawione problemy związane z brakiem indeksy w nowo utworzonych notatkach** - autor kursu nie zauważył braku `id` w nowo tworzonych notatkach. Powodowało to problemy - kliknięcie przycisku `edycji`/`usuń` powodowało wykonanie akcji na pierwszej notatce o tym samym id. Problem rozwiązałem.
+
 ---
 
 Pozdrawiam <br/>

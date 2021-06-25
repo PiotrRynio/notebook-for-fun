@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {EntityIdGenerator} from '../../../common/EntityIdGenerator';
 
 function NewNote(props) {
 
@@ -7,7 +8,11 @@ function NewNote(props) {
   const [description, setDescription] = useState("");
 
   const onAddNote = () => {
-    const note = {title, body: description}
+    const note = {
+      title, body:
+      description,
+      id: EntityIdGenerator.generate()
+    }
     props.onAddNote(note)
     setTitle('');
     setDescription('')
@@ -16,7 +21,7 @@ function NewNote(props) {
 
   return (
     isShowingForm ?
-     ( <div className="note">
+      (<div className="note">
         <label>Tytuł</label>
         <input type="text" value={title} onChange={event => setTitle(event.target.value)}/>
 
@@ -26,7 +31,7 @@ function NewNote(props) {
         <button onClick={onAddNote}>Dodaj notatkę!</button>
       </div>)
       :
-      <button onClick={()=>setIsShowingForm(true)}>Nowa notatka</button>
+      <button onClick={() => setIsShowingForm(true)}>Nowa notatka</button>
 
   );
 }
