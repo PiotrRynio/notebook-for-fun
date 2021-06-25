@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 export function Note({ body, title, onDelete, id }) {
   const [isShowedDescription, setIsShowedDescription] = useState(false);
