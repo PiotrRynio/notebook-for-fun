@@ -5,6 +5,7 @@ import NewNote from './NewNote/NewNote';
 import Modal from 'react-modal';
 import { EditNote } from './EditNote/EditNote';
 import axios from 'axios';
+import { PATH_NOTES_URL } from '../../common/constants/apiPaths';
 
 export function Notes() {
   const startingNotesBD = [];
@@ -14,24 +15,23 @@ export function Notes() {
   const [isEditFormOpened, setIsEditFormOpened] = useState(false);
 
   useEffect(() => {
-    fetchNotes();
-  });
+    fetchNotes().then();
+  }, [editNote, isEditFormOpened]);
+
+  const fetchNotes = async () => await axios.get(PATH_NOTES_URL).then(({ data }) => setNotes(data));
+
+  const addNote = async (note) =>
+    await axios.post(PATH_NOTES_URL, note).then(({ data }) => setNotes([...notes].concat(data)));
 
   const deleteNote = (_id) => setNotes([...notes].filter((note) => _id !== note._id));
-  const addNote = (note) => setNotes([...notes].concat(note));
 
   const onEditNote = (note) => {
-    console.log(note);
     const returnedNotes = [...notes];
     const editNoteIndex = returnedNotes.findIndex(({ _id }) => _id === note._id);
-    console.log(editNoteIndex);
     returnedNotes[editNoteIndex] = note;
     setNotes(returnedNotes);
     toggleEditFormModal();
   };
-
-  const fetchNotes = async () =>
-    await axios.get('http://localhost:3001/api/notes').then(({ data }) => setNotes(data));
 
   const toggleEditFormModal = () => {
     setIsEditFormOpened(!isEditFormOpened);
