@@ -23,9 +23,13 @@ export function Notes() {
   const addNote = async (note) =>
     await axios.post(PATH_NOTES_URL, note).then(({ data }) => setNotes([...notes].concat(data)));
 
-  const deleteNote = (_id) => setNotes([...notes].filter((note) => _id !== note._id));
+  const deleteNote = async (_id) => {
+    await axios.delete(PATH_NOTES_URL + '/' + _id);
+    setNotes([...notes].filter((note) => _id !== note._id));
+  };
 
-  const onEditNote = (note) => {
+  const onEditNote = async (note) => {
+    await axios.put(PATH_NOTES_URL + '/' + note._id, { note });
     const returnedNotes = [...notes];
     const editNoteIndex = returnedNotes.findIndex(({ _id }) => _id === note._id);
     returnedNotes[editNoteIndex] = note;

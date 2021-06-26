@@ -8,7 +8,7 @@ class NoteActions {
   }
 
   async getNote(req, res) {
-    const _id = req.params._id;
+    const _id = req.params.id;
     await Note.findOne({ _id: _id }, (err, doc) => doc)
       .then((doc) => res.status(200).json(doc))
       .catch((err) => res.status(404).json({ message: `Brak notatki: ${err}` }));
@@ -25,8 +25,9 @@ class NoteActions {
   }
 
   async updateNote(req, res) {
-    const { _id } = req.params;
-    const { title, body } = req.body;
+    const _id = req.params.id;
+    const { title, body } = req.body.note;
+
     await Note.findOne({ _id: _id }, (err, doc) => doc)
       .then((note) => {
         note.title = title || note.title;
