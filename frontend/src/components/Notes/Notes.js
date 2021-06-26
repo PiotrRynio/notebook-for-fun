@@ -1,40 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Notes.css';
 import { Note } from './Note/Note';
 import NewNote from './NewNote/NewNote';
 import Modal from 'react-modal';
 import { EditNote } from './EditNote/EditNote';
+import axios from 'axios';
 
 export function Notes() {
-  const startingNotesBD = [
-    {
-      id: '2323',
-      title: 'Wykąpać psa',
-      body: 'Pamiętać o nim i użyć szamponu',
-    },
-    {
-      id: '4555',
-      title: 'Zrobić zakupy',
-      body: 'mleko, jajka, chleb',
-    },
-  ];
+  const startingNotesBD = [];
 
   const [notes, setNotes] = useState(startingNotesBD);
   const [editNote, setEditNote] = useState({});
   const [isEditFormOpened, setIsEditFormOpened] = useState(false);
 
-  const deleteNote = (id) => setNotes([...notes].filter((note) => id !== note.id));
+  useEffect(() => {
+    fetchNotes();
+  });
+
+  const deleteNote = (_id) => setNotes([...notes].filter((note) => _id !== note._id));
   const addNote = (note) => setNotes([...notes].concat(note));
 
   const onEditNote = (note) => {
     console.log(note);
     const returnedNotes = [...notes];
-    const editNoteIndex = returnedNotes.findIndex(({ id }) => id === note.id);
+    const editNoteIndex = returnedNotes.findIndex(({ _id }) => _id === note._id);
     console.log(editNoteIndex);
     returnedNotes[editNoteIndex] = note;
     setNotes(returnedNotes);
     toggleEditFormModal();
   };
+
+  const fetchNotes = async () =>
+    await axios.get('http://localhost:3001/api/notes').then(({ data }) => setNotes(data));
 
   const toggleEditFormModal = () => {
     setIsEditFormOpened(!isEditFormOpened);
@@ -51,24 +48,24 @@ export function Notes() {
 
       <NewNote onAddNote={(note) => addNote(note)} />
 
-      <Modal isOpen={isEditFormOpened} contentLabel={'Edytuj notatkę'}>
+      <Modal isOpen={isEditFormOpened} contentLabel={'Edytuj notatkę'} ariaHideApp={false}>
         <EditNote
           title={editNote.title}
           body={editNote.body}
-          id={editNote.id}
+          _id={editNote._id}
           onEdit={(note) => onEditNote(note)}
         />
         <button onClick={() => toggleEditFormModal()}>Anuluj</button>
       </Modal>
 
-      {notes.map(({ title, body, id }) => (
+      {notes.map(({ title, body, _id }) => (
         <Note
-          key={id}
-          id={id}
+          key={_id}
+          _id={_id}
           title={title}
           body={body}
           onEdit={(note) => editNoteHandler(note)}
-          onDelete={(id) => deleteNote(id)}
+          onDelete={(_id) => deleteNote(_id)}
         />
       ))}
     </div>

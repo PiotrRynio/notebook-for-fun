@@ -7,7 +7,7 @@ export const EditNote = (props)=> {
   const onChangeDescriptionHandler = value => setDescription(value);
 
   const onEditNote = () => {
-    const note = {id:props.id, title, body: description}
+    const note = {_id:props._id, title, body: description}
     props.onEdit(note)
     setTitle('');
     setDescription('')
