@@ -38,9 +38,14 @@ class NoteActions {
   }
 
   async deleteNote(req, res) {
-    const _id = req.params._id;
+    const _id = req.params.id;
     const msg = await Note.deleteOne({ _id: _id }).then(({ deletedCount }) =>
-      deletedCount ? { status: 204 } : { status: 404, text: 'Not possible - note does not exist' },
+      deletedCount
+        ? { status: 204 }
+        : {
+            status: 404,
+            text: 'Not possible - note does not exist',
+          },
     );
     res.status(msg.status).json({ message: msg.text });
   }
