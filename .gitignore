@@ -3,6 +3,8 @@
 **/.env*.local
 frontend/.env
 /frontend/.env
+backend/.env
+/backend/.env
 
 # Windows
 $RECYCLE.BIN/
