@@ -8,8 +8,8 @@ class NoteActions {
   }
 
   async getNote(req, res) {
-    const id = req.params.id;
-    await Note.findOne({ _id: id }, (err, doc) => doc)
+    const _id = req.params.id;
+    await Note.findOne({ _id: _id }, (err, doc) => doc)
       .then((doc) => res.status(200).json(doc))
       .catch((err) => res.status(404).json({ message: `Brak notatki: ${err}` }));
   }
@@ -25,9 +25,10 @@ class NoteActions {
   }
 
   async updateNote(req, res) {
-    const { id } = req.params;
-    const { title, body } = req.body;
-    await Note.findOne({ _id: id }, (err, doc) => doc)
+    const _id = req.params.id;
+    const { title, body } = req.body.note;
+
+    await Note.findOne({ _id: _id }, (err, doc) => doc)
       .then((note) => {
         note.title = title || note.title;
         note.body = body || note.body;
@@ -38,9 +39,14 @@ class NoteActions {
   }
 
   async deleteNote(req, res) {
-    const id = req.params.id;
-    const msg = await Note.deleteOne({ _id: id }).then(({ deletedCount }) =>
-      deletedCount ? { status: 204 } : { status: 404, text: 'Not possible - note does not exist' },
+    const _id = req.params.id;
+    const msg = await Note.deleteOne({ _id: _id }).then(({ deletedCount }) =>
+      deletedCount
+        ? { status: 204 }
+        : {
+            status: 404,
+            text: 'Not possible - note does not exist',
+          },
     );
     res.status(msg.status).json({ message: msg.text });
   }

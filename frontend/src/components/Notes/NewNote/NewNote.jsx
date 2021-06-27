@@ -11,7 +11,7 @@ function NewNote(props) {
     const note = {
       title, body:
       description,
-      id: EntityIdGenerator.generate()
+      _id: EntityIdGenerator.generate()
     }
     props.onAddNote(note)
     setTitle('');
