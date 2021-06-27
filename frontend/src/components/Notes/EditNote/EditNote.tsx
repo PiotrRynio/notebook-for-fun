@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
+import {EditNoteType} from './EditNoteType'
 
-export const EditNote = (props)=> {
+export const EditNote = (props:EditNoteType)=> {
   const [title, setTitle] = useState(props.title);
   const [description, setDescription] = useState(props.body);
 
-  const onChangeDescriptionHandler = value => setDescription(value);
+  const onChangeDescriptionHandler = (value:string) => setDescription(value);
 
   const onEditNote = () => {
     const note = {_id:props._id, title, body: description}
