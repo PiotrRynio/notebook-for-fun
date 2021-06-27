@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { Notes } from "./components/Notes/Notes";
 
 import "./App.css";
