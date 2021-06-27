@@ -28,7 +28,14 @@ oraz `npm run start-fe`.
 - **clean code** - część kodu pisałem z zasadami pisania "Czystego Kodu". Wykorzystywałem między innymi funkcje
   mapujące, funkcje strzałkowe czy sposoby na krótsze pisanie funkcji. Używałem również komponentów funkcyjnych.
 
-- **naprawione problemy związane z brakiem indeksy w nowo utworzonych notatkach** - autor kursu nie zauważył braku `id` w nowo tworzonych notatkach. Powodowało to problemy - kliknięcie przycisku `edycji`/`usuń` powodowało wykonanie akcji na pierwszej notatce o tym samym id. Problem rozwiązałem.
+- **naprawione problemy związane z brakiem indeksów w nowo utworzonych notatkach** - autor kursu nie zauważył braku `id`
+  w nowo tworzonych notatkach. Powodowało to problemy - kliknięcie przycisku `edycji`/`usuń` powodowało wykonanie akcji
+  na pierwszej notatce o tym samym id. Problem rozwiązałem.
+
+- **Użycie innej biblioteki do wyświetlania powiadomień z backendu** - podczas dodawania pustej notatki wyświetla się
+  powiadomienie z informacją, że przesłano nieprawidłowe dane na serwer. Użyta biblioteka przez autora była
+  aktualizowana dość dawno i powodowała wyświetlenie informacji o błędzie w konsoli przeglądarki "Warning: findDOMNode
+  is deprecated in StrictMode". Zainstalowałem inną bibliotekę, która jest aktualizowana częściej. Działa podobnie.
 
 ---
 

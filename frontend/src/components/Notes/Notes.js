@@ -6,6 +6,8 @@ import Modal from 'react-modal';
 import { EditNote } from './EditNote/EditNote';
 import axios from '../../common/axios';
 import { NOTES_URL_PATH } from '../../common/constants/apiPaths';
+import ReactNotification, { store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 
 export function Notes() {
   const startingNotesBD = [];
@@ -21,7 +23,24 @@ export function Notes() {
   const fetchNotes = async () => await axios.get(NOTES_URL_PATH).then(({ data }) => setNotes(data));
 
   const addNote = async (note) =>
-    await axios.post(NOTES_URL_PATH, note).then(({ data }) => setNotes([...notes].concat(data)));
+    await axios
+      .post(NOTES_URL_PATH, note)
+      .then(({ data }) => setNotes([...notes, data]))
+      .catch((err) =>
+        store.addNotification({
+          title: 'Błąd!',
+          message: err.response.data.message,
+          type: 'danger',
+          insert: 'top',
+          container: 'top-right',
+          animationIn: ['animate__animated', 'animate__fadeIn'],
+          animationOut: ['animate__animated', 'animate__fadeOut'],
+          dismiss: {
+            duration: 5000,
+            onScreen: true,
+          },
+        }),
+      );
 
   const deleteNote = async (_id) => {
     await axios.delete(NOTES_URL_PATH + '/' + _id);
@@ -48,6 +67,8 @@ export function Notes() {
 
   return (
     <div>
+      <ReactNotification />
+
       <p>Moje notatki:</p>
 
       <NewNote onAddNote={(note) => addNote(note)} />
